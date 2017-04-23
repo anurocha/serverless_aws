@@ -1,0 +1,3 @@
+{
+  "thb" : $input.params("thb")
+}

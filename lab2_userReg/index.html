@@ -1,0 +1,42 @@
+<html>
+<script>
+
+function loadData(){
+	
+	//put URL here
+	var urlListUserAPI = '';
+	fetch(urlListUserAPI)
+	.then((res)=>{
+		var demoP = document.getElementById("demo");
+		res.json().then((data)=>{
+			data.Items.forEach((item, idx)=>{
+				demoP.innerHTML = demoP.innerHTML + `${idx} : ${item.name} ${item.lastname} <br/>`;
+			});
+		})
+	});
+}
+
+function addUser(n, ln){
+	//put URL here
+	var urlAddUserAPI = '';
+	fetch(urlAddUserAPI,
+		{
+			method: "POST",
+			headers : {'Content-Type': 'application/json'},
+	    	body: JSON.stringify({ 
+	    		'name' : n,
+	    		'lastname' : ln
+	    	})
+		})
+	.then((res)=>{
+		location.reload();
+	});
+}
+
+
+</script>
+<body onload="loadData()">
+<p id="demo"></p>
+<input id='newName' placeholder="NAME" /> <input id='newLastName' placeholder="LASTNAME" />  <button onclick='addUser(newName.value, newLastName.value)'>add</button>
+</body>
+</html>
